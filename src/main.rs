@@ -1,6 +1,7 @@
 use std::io::{self, BufRead};
 
 mod board;
+mod command;
 mod object;
 mod parser;
 
@@ -11,6 +12,6 @@ fn main() {
     let stdin = io::stdin();
     let mut iterator = stdin.lock().lines();
 
-    let header = iterator.next().unwrap().unwrap();
-    let body = iterator.next().unwrap().unwrap();
+    let (board, object) = parser::parse_header(&iterator.next().unwrap().unwrap());
+    let body = parser::parse_body(&iterator.next().unwrap().unwrap());
 }
