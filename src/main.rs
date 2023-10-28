@@ -2,6 +2,7 @@ use std::io::{self, BufRead};
 
 mod board;
 mod command;
+mod direction;
 mod object;
 mod parser;
 
