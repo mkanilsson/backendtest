@@ -4,12 +4,12 @@ use crate::{board::Board, command::Command, object::Object};
 pub fn parse_header(line: &str) -> (Board, Object) {
     let parts = line.split(",").collect::<Vec<_>>();
 
-    let width: usize = parts[0].parse().expect("Width to be a number");
-    let height: usize = parts[1].parse().expect("Height to be a number");
+    let width: isize = parts[0].parse().expect("Width to be a number");
+    let height: isize = parts[1].parse().expect("Height to be a number");
     let board = Board::new(width, height);
 
-    let x: usize = parts[2].parse().expect("x to be a number");
-    let y: usize = parts[3].parse().expect("y to be a number");
+    let x: isize = parts[2].parse().expect("x to be a number");
+    let y: isize = parts[3].parse().expect("y to be a number");
     let object = Object::new(x, y);
 
     (board, object)
