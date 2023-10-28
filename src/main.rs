@@ -52,3 +52,31 @@ fn run(board: Board, mut object: Object, commands: Vec<Command>) -> Option<Objec
 
     Some(object)
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::parser::{parse_body, parse_header};
+
+    use super::*;
+
+    #[test]
+    fn verify_valid_game() {
+        let (board, object) = parse_header("4,4,2,2");
+        let commands = parse_body("1,4,1,3,2,3,2,4,1,0");
+
+        let result = run(board, object, commands);
+        assert!(result.is_some());
+        let result = result.unwrap();
+        assert_eq!(result.x, 0);
+        assert_eq!(result.y, 1);
+    }
+
+    #[test]
+    fn verify_invalid_game() {
+        let (board, object) = parse_header("4,4,2,2");
+        let commands = parse_body("1,1,1,1,1"); // Move out of the board
+
+        let result = run(board, object, commands);
+        assert!(result.is_none());
+    }
+}
