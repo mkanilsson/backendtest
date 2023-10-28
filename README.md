@@ -1,10 +1,10 @@
 # Backend test
 
-Time it took too complete: `1h 17min` (between first commit `Initial commit 19394231` and `Add test for run() 3c94c958`)
+Time it took too complete: `1h 27min` (between first commit `Initial commit 19394231` and `Add test for run() 3c94c958` + like `5min` to add tests for `Direction`)
 
 ## How to run
 
-Use bash/zsh/fish or git bash and `cd` into the project and run:
+Use `bash`/`zsh`/`fish` or `git bash` and `cd` into the project and run:
 
 ```bash
 cat testinput.txt | cargo run
@@ -27,11 +27,19 @@ width,height,x,y
 cmd1,cmd2,cmd3,...,cmdn
 ```
 
+`cmd` can be one of `0`, `1`, `2`, `3` or `4`.
+
+If the input is malformatted, the program will panic.
+
+If `width`, `height`, `x`, `y` isn't a number or if a `command` is not one of the valid ones, the program will panic.
+
+If the `object` is out-of-bounds at any point in the execution, the program will halt and not process the remaining commands.
+
 ## Things to keep in mind
 
 ### Handle different shapes than a rectangle
 
-This could easially be added by changing `Board` to a trait and pass a `Box<dyn Board>` around instead of `Board`. Then implement, for example `Rectagle` by implementing the `Board` trait for `Rectagle` and write a custom `is_legal_position`.
+This could easily be added by changing `Board` to a trait and pass a `Box<dyn Board>` around instead of `Board`. Then implement, for example `Rectagle` by implementing the `Board` trait for `Rectagle` and write a custom `is_legal_position`.
 
 ### Add more commands like rotating the table instead of the object
 
@@ -45,5 +53,6 @@ The output would have to be changed in `main()` as well.
 
 ## Test coverage:
 
-https://codecov.io/github/mkanilsson/backendtest?branch=master
+[![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/mkanilsson/backendtest.svg)](https://codecov.io/github/mkanilsson/backendtest?branch=master)
 
+The logic in `main` is so simple and there is no resonable way to extract the functionallity that `main` provide to a more testable function.
