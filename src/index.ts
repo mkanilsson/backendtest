@@ -33,7 +33,7 @@ rl.on('line', (line) => {
     }
 });
 
-function run(board: Board, point: Point, commands: Command[]): Point | null {
+export function run(board: Board, point: Point, commands: Command[]): Point | null {
     for(let cmd of commands) {
         switch(cmd) {
             case "Quit":
