@@ -1,5 +1,6 @@
 import Board from "./board";
 import Point from "./point";
+import { Command, commandFromString } from "./command";
 
 export function parseHeader(line: string): [Board, Point] {
     const parts = line.split(",");
@@ -13,4 +14,8 @@ export function parseHeader(line: string): [Board, Point] {
     if(isNaN(x) || isNaN(y)) throw new Error("Invalid Header")
 
     return [new Board(width, height), new Point(x, y)];
+}
+
+export function parseBody(line: string): Command[] {
+    return line.split(",").map(commandFromString);
 }

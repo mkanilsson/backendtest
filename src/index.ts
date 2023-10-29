@@ -1,5 +1,5 @@
 import readline from "readline";
-import { parseHeader } from "./parser";
+import { parseHeader, parseBody } from "./parser";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -21,5 +21,6 @@ rl.on('line', (line) => {
     else if (lineNumber == 1) {
         lineNumber++;
         let [board, point] = parseHeader(header);
+        let commands = parseBody(line);
     }
 });
