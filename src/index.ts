@@ -1,4 +1,5 @@
 import readline from "readline";
+import { parseHeader } from "./parser";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -11,16 +12,14 @@ const rl = readline.createInterface({
 //       and to know when to execute the "algorithm."
 let lineNumber = 0;
 let header: string;
-let body: string;
 
 rl.on('line', (line) => {
     if (lineNumber == 0) {
-        header = line;
         lineNumber++;
+        header = line;
     }
     else if (lineNumber == 1) {
-        header = line;
         lineNumber++;
-        // TODO: Run the program
+        let [board, point] = parseHeader(header);
     }
 });
