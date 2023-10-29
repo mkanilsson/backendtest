@@ -1,9 +1,12 @@
 import readline from "readline";
 import { parseHeader, parseBody } from "./parser";
 
+import Board from "./board";
+import Point from "./point";
+import { Command } from "./command";
+
 const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout,
 });
 
 // HACK: Javascipt has no good way to read from stdin
@@ -22,5 +25,33 @@ rl.on('line', (line) => {
         lineNumber++;
         let [board, point] = parseHeader(header);
         let commands = parseBody(line);
+
+        let result = run(board, point, commands);
+
+        if(result == null) console.log("[-1,-1]");
+        else console.log(`[${result.x},${result.y}]`);
     }
 });
+
+function run(board: Board, point: Point, commands: Command[]): Point | null {
+    for(let cmd of commands) {
+        switch(cmd) {
+            case "Quit":
+                return point;
+            case "MoveForward":
+                if (!point.moveForward(board)) return null;
+                break;
+            case "MoveBackward":
+                if (!point.moveBackward(board)) return null;
+                break;
+            case "RotateClockwise":
+                point.rotateClockwise();
+                break;
+            case "RotateCounterClockwise":
+                point.rotateCounterClockwise();
+                break;
+        }
+    }
+
+    return point;
+}
