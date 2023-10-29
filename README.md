@@ -1,3 +1,7 @@
+# This is the Rust implementation
+
+Please checkout the [typescript branch](https://github.com/mkanilsson/backendtest/tree/typescript) instead.
+
 # Backend test
 
 Time it took too complete: `1h 27min` (between first commit `Initial commit 19394231` and `Add test for run() 3c94c958` + like `5min` to add tests for `Direction`)
