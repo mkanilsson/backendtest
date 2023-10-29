@@ -74,3 +74,30 @@ describe("point", () => {
         expect(point.y).toEqual(0);
     });
 });
+
+
+describe("direction", () => {
+    it("should rotate clockwise", () => {
+        let [_, point] = parseHeader("1,1,0,0");
+        point.rotateClockwise();
+        expect(point.direction).toBe("East");
+        point.rotateClockwise();
+        expect(point.direction).toBe("South");
+        point.rotateClockwise();
+        expect(point.direction).toBe("West");
+        point.rotateClockwise();
+        expect(point.direction).toBe("North");
+    })
+
+    it("should rotate counter-clockwise", () => {
+        let [_, point] = parseHeader("1,1,0,0");
+        point.rotateCounterClockwise();
+        expect(point.direction).toBe("West");
+        point.rotateCounterClockwise();
+        expect(point.direction).toBe("South");
+        point.rotateCounterClockwise();
+        expect(point.direction).toBe("East");
+        point.rotateCounterClockwise();
+        expect(point.direction).toBe("North");
+    })
+})
